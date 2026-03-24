@@ -1,12 +1,15 @@
 import { test, expect } from '@playwright/test';
 import { request } from '@playwright/test';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 test.describe('API Automation - Petstore CRUD Operations', () => {
   let apiContext: any;
   let petId: number;
   let createdPetData: any;
   let updatedPetData: any;
-  const baseUrl = 'https://petstore.swagger.io/v2';
+  const baseUrl = process.env.PETSTORE_BASE_URL || 'https://petstore.swagger.io/v2';
 
   test.beforeAll(async () => {
     apiContext = await request.newContext();
