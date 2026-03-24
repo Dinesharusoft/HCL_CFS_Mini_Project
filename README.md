@@ -118,6 +118,22 @@ npm run report
 
 ## Configuration
 
+### Environment Variables
+The project uses `.env` file for configuration management:
+
+```bash
+# Edit .env file to customize settings
+# Environment variables are automatically loaded
+```
+
+### Key Environment Variables
+- **AMAZON_BASE_URL**: Base URL for UI tests (default: https://www.amazon.in)
+- **PETSTORE_BASE_URL**: Base URL for API tests (default: https://petstore.swagger.io/v2)
+- **TEST_TIMEOUT**: Global test timeout in milliseconds (default: 60000)
+- **HEADLESS_MODE**: Run tests in headless mode (default: true)
+- **PARALLEL_WORKERS**: Number of parallel workers (default: 1)
+
+### Default Configuration
 - **Base URL**: https://www.amazon.in (for UI tests)
 - **API Base URL**: https://petstore.swagger.io/v2 (for API tests)
 - **Browsers**: Chromium, Firefox, WebKit (Safari)
@@ -153,10 +169,3 @@ This project includes automated testing with GitHub Actions:
 - Screenshots are saved for UI test verification
 - Tests are configured to run in parallel for faster execution
 
-## Troubleshooting
-
-If tests fail due to website changes or API blocking:
-1. Check if Amazon has changed their UI elements
-2. Verify Petstore API is accessible
-3. Update selectors or endpoints as needed
-4. Consider using alternative public websites/APIs if persistent blocking occurs

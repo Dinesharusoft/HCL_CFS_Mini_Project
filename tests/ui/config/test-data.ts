@@ -1,17 +1,22 @@
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
+
 export const TestData = {
   urls: {
-    amazon: 'https://www.amazon.in',
-    amazonElectronics: 'https://www.amazon.in/electronics',
-    amazonMobiles: 'https://www.amazon.in/mobile-phones',
+    amazon: process.env.AMAZON_BASE_URL || 'https://www.amazon.in',
+    amazonElectronics: `${process.env.AMAZON_BASE_URL || 'https://www.amazon.in'}/electronics`,
+    amazonMobiles: `${process.env.AMAZON_BASE_URL || 'https://www.amazon.in'}/mobile-phones`,
   },
   
   searchTerms: {
-    laptop: 'laptop',
+    laptop: process.env.AMAZON_SEARCH_TERM || 'laptop',
     mobile: 'mobile phone',
   },
   
   categories: {
-    electronics: 'Electronics',
+    electronics: process.env.AMAZON_CATEGORY || 'Electronics',
     computers: 'Computers'
   },
   
@@ -37,5 +42,5 @@ export const TestData = {
     pageLoadTimeout: 'Page load timeout',
     elementNotVisible: 'Element not visible',
     elementNotClickable: 'Element not clickable',
-  }
+  },
 };
