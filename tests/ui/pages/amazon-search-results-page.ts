@@ -34,7 +34,6 @@ export class AmazonSearchResultsPage {
     return await this.filterSection.isVisible();
   }
 
-
   async getCurrentUrl(): Promise<string> {
     return this.page.url();
   }
