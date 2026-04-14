@@ -26,13 +26,6 @@ async takeDesktopScreenshot(fileName: string): Promise<string> {
   const fs = require('fs');
   fs.writeFileSync(screenshotPath, imgBuffer);
   
-  // Also save to test-results folder
-  const resultsPath = join(__dirname, '../../../test-results');
-  if (!fs.existsSync(resultsPath)) {
-    fs.mkdirSync(resultsPath, { recursive: true });
-  }
-  fs.writeFileSync(join(resultsPath, screenshotName), imgBuffer);
-  
   return screenshotPath;
 }
 ```
