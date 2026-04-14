@@ -1,5 +1,6 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { join } from 'path';
+import screenshot from 'screenshot-desktop';
 
 export class CommonFunctions {
   readonly page: Page;
@@ -181,5 +182,31 @@ export class CommonFunctions {
 
   async getCurrentTimestamp(): Promise<string> {
     return new Date().toISOString().replace(/[:.]/g, '-');
+  }
+
+  async takeDesktopScreenshot(fileName: string): Promise<string> {
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const screenshotName = `desktop-${fileName}-${timestamp}.png`;
+    const screenshotPath = join(this.verificationPath, screenshotName);
+    
+    try {
+      const imgBuffer = await screenshot({ format: 'png' });
+      const fs = require('fs');
+      fs.writeFileSync(screenshotPath, imgBuffer);
+      
+      await this.logMessage(`Desktop screenshot saved: ${screenshotName}`);
+      return screenshotPath;
+    } catch (error) {
+      await this.logError(error as Error);
+      throw error;
+    }
+  }
+
+  async createResultsDirectory(): Promise<void> {
+    const fs = require('fs');
+    const resultsPath = join(__dirname, '../../../test-results');
+    if (!fs.existsSync(resultsPath)) {
+      fs.mkdirSync(resultsPath, { recursive: true });
+    }
   }
 }

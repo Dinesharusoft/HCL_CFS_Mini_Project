@@ -14,6 +14,15 @@ test.describe('UI Automation - Amazon', () => {
     electronicsPage = new AmazonElectronicsPage(page);
     commonFunctions = new CommonFunctions(page);
     await commonFunctions.createVerificationDirectory();
+    await commonFunctions.createResultsDirectory();
+  });
+
+  test.afterEach(async ({ page }, testInfo) => {
+    // Take desktop screenshot at the end of each test
+    const testName = testInfo.title || 'unknown-test';
+    const testNameSanitized = testName.replace(/[^a-zA-Z0-9]/g, '-');
+    await commonFunctions.takeDesktopScreenshot(testNameSanitized);
+    await commonFunctions.logMessage(`Desktop screenshot captured for test: ${testName}`);
   });
 
   test('Category Navigation @cat', async ({ page }) => {

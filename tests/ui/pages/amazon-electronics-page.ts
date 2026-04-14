@@ -52,4 +52,6 @@ export class AmazonElectronicsPage {
     const content = await this.page.content();
     return content.toLowerCase().includes(text.toLowerCase());
   }
-}
+} 
+
+// Testing
